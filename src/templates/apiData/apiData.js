@@ -1,5 +1,6 @@
 import React from 'react'
 import Infotablo from '../infoTablo/infoTablo';
+import ConverterInput from '../converterInput/converterInput';
 
 
 class Apidata extends React.Component {
@@ -49,13 +50,17 @@ class Apidata extends React.Component {
             return(
                 <div>
                     <div>
-                        <Infotablo nameFirstValute={this.state.nameFirstValute} nameSecValute={this.state.nameSecValute} nameThiValute={this.state.nameThiValute}
-                        valueFirstValute={this.state.valueFirstValute} valueSecValute={this.state.valueSecValute} valueThiValute={this.state.valueThiValute}/>
+                        <ConverterInput/>
+                    </div>
+                    <div>
+                    <Infotablo nameFirstValute={this.state.nameFirstValute} nameSecValute={this.state.nameSecValute} nameThiValute={this.state.nameThiValute}
+                    valueFirstValute={this.state.valueFirstValute} valueSecValute={this.state.valueSecValute} valueThiValute={this.state.valueThiValute}/>
                     </div>
                 </div>
                 )
         }
     }
 }
+
 
 export default Apidata;
