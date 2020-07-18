@@ -1,6 +1,30 @@
 import React from 'react';
 
 class ConverterInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            inputUSDLoaded: false,
+            inputEULoaded: false,
+            inputUAHLoaded: false;
+
+        }
+        this.btnUSD = this.btnUSD.bind(this);
+        this.btnEU = this.btnEU.bind(this);
+        this.btnUAH = this.btnUAH.bind(this);
+    }
+    
+    btnUAH() {
+
+    }
+
+    btnEU() {
+
+    }
+
+    btnUSD() {
+
+    }
     
     componentDidMount() {
         fetch('https://www.cbr-xml-daily.ru/daily_json.js') // api от ЦБ РФ
@@ -21,8 +45,13 @@ class ConverterInput extends React.Component {
     }
 
     render() {
+        is
         return(
-            <div>7890</div>
+            <div>
+                <button onClick={}>USD</button>
+                <button>EU</button>
+                <button>UAH</button>
+            </div>
         )
     }
 }
