@@ -12,6 +12,7 @@ class ConverterInput extends React.Component {
         this.btnUSD = this.btnUSD.bind(this);
         this.btnEU = this.btnEU.bind(this);
         this.btnUAH = this.btnUAH.bind(this);
+        this.ChangeInputValueUAH = this.ChangeInputValueUAH.bind(this);
     }
     
     btnUAH() {
@@ -41,6 +42,12 @@ class ConverterInput extends React.Component {
         console.log(this.state.inputUSDLoaded, this.state.inputEULoaded, this.state.inputUAHLoaded);
     }
     
+    ChangeInputValueUAH(e) {
+        this.setState({
+            value: (parseInt(e.target.value)*parseInt(this.state.valueThiValute)),
+        })
+    }
+    
 
     
     componentDidMount() {
@@ -68,7 +75,8 @@ class ConverterInput extends React.Component {
                 <h1>Загрузка</h1>
             </div>)
         }
-        else if (inputEULoaded===true && inputUSDLoaded===false && inputUAHLoaded===false){
+        else if (inputEULoaded===true && inputUSDLoaded===false && inputUAHLoaded===false){ 
+            // Открытие EU поля
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
@@ -80,6 +88,7 @@ class ConverterInput extends React.Component {
             </div>)
         }
         else if (inputEULoaded===false && inputUAHLoaded===false && inputUSDLoaded===false) {
+            // Открытие h1
             return <div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
@@ -88,6 +97,7 @@ class ConverterInput extends React.Component {
             </div>
         }
         else if (inputEULoaded===true || inputUAHLoaded===false || inputUSDLoaded===true) {
+            // Открытие USD поля
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
@@ -99,14 +109,20 @@ class ConverterInput extends React.Component {
             </div>)
         }
         else if (inputEULoaded===false || inputUAHLoaded===true || inputUSDLoaded===false) {
+            const Input = (props) => (
+                <input type="text" onChange={props.ChangeInputValueUAH}/>
+            )
+            const Output = (props) => (
+                <div>{props.text}</div>
+            )
+            // Открытие UAH поля
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
                 <h3>Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
-                <form action="">
-                    <input type="text"/>
-                </form>
+                <Input ChangeInputValueUAH={this.ChangeInputValueUAH}/>
+                <Output text={this.state.value}/>
             </div>)
         }
 
@@ -137,14 +153,5 @@ function BtnUAHValute(props) {
     )
 }
 
-// function BtnAllValute(props) {
-//     return(
-//         <div>
-//             <BtnUSDValute onClick={props.onClick}/>
-//             <BtnEUValute onClick={props.onClick}/>
-//             <BtnUAHValute onClick={props.onClick}/>
-//         </div>
-//     )
-// }
 
 export default ConverterInput;
