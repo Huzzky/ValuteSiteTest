@@ -85,6 +85,7 @@ class ConverterInput extends React.Component {
                 <form action="">
                     <input type="text"/>
                 </form>
+                <button>Рассчитать</button>
             </div>)
         }
         else if (inputEULoaded===false && inputUAHLoaded===false && inputUSDLoaded===false) {
@@ -106,6 +107,7 @@ class ConverterInput extends React.Component {
                 <form action="">
                     <input type="text"/>
                 </form>
+                <button>Рассчитать</button>
             </div>)
         }
         else if (inputEULoaded===false || inputUAHLoaded===true || inputUSDLoaded===false) {
@@ -122,6 +124,7 @@ class ConverterInput extends React.Component {
                 <BtnUAHValute onClick={this.btnUAH}/>
                 <h3>Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
                 <Input ChangeInputValueUAH={this.ChangeInputValueUAH}/>
+                <button>Рассчитать</button>
                 <Output text={this.state.value}/>
             </div>)
         }
