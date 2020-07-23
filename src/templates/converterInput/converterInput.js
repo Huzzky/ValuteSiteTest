@@ -44,8 +44,10 @@ class ConverterInput extends React.Component {
     
     ChangeInputValueUAH(e) {
         this.setState({
-            value: (parseInt(e.target.value)*parseInt(this.state.valueThiValute)),
-        })
+            value: e.target.value,
+        });
+        console.log(this.state.value);
+        
     }
     
 
@@ -77,14 +79,15 @@ class ConverterInput extends React.Component {
         }
         else if (inputEULoaded===true && inputUSDLoaded===false && inputUAHLoaded===false){ 
             // Открытие EU поля
+            const Input = (props) => (
+                <input type="text" onChange={props.ChangeInputValueUAH}/>
+            )
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
                 <h3>Введи сколько тебе нужно ЕВРО перевести в рубли</h3>
-                <form action="">
-                    <input type="text"/>
-                </form>
+                <Input ChangeInputValueUAH={this.ChangeInputValueUAH}/>
                 <button>Рассчитать</button>
             </div>)
         }
@@ -99,23 +102,21 @@ class ConverterInput extends React.Component {
         }
         else if (inputEULoaded===true || inputUAHLoaded===false || inputUSDLoaded===true) {
             // Открытие USD поля
+            const Input = (props) => (
+                <input type="text" onChange={props.ChangeInputValueUAH}/>
+            )
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
                 <h3>Введи сколько тебе нужно ДОЛЛАРОВ перевести в рубли</h3>
-                <form action="">
-                    <input type="text"/>
-                </form>
+                <Input ChangeInputValueUAH={this.ChangeInputValueUAH}/>
                 <button>Рассчитать</button>
             </div>)
         }
         else if (inputEULoaded===false || inputUAHLoaded===true || inputUSDLoaded===false) {
             const Input = (props) => (
                 <input type="text" onChange={props.ChangeInputValueUAH}/>
-            )
-            const Output = (props) => (
-                <div>{props.text}</div>
             )
             // Открытие UAH поля
             return(<div>
@@ -125,7 +126,6 @@ class ConverterInput extends React.Component {
                 <h3>Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
                 <Input ChangeInputValueUAH={this.ChangeInputValueUAH}/>
                 <button>Рассчитать</button>
-                <Output text={this.state.value}/>
             </div>)
         }
 
