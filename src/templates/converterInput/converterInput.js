@@ -3,6 +3,7 @@ import React from 'react';
 class ConverterInput extends React.Component {
     constructor(props) {
         super(props);
+        this.input = React.createRef();
         this.state = {
             inputUSDLoaded: false,
             inputEULoaded: false,
@@ -12,7 +13,8 @@ class ConverterInput extends React.Component {
         this.btnUSD = this.btnUSD.bind(this);
         this.btnEU = this.btnEU.bind(this);
         this.btnUAH = this.btnUAH.bind(this);
-        this.ChangeInputValueUAH = this.ChangeInputValueUAH.bind(this);
+        this.BtnInputValueUAH = this.BtnInputValueUAH.bind(this);
+        this.ChangeInputValueUAH = this.BtnInputValueUAH.bind(this);
     }
     
     btnUAH() {
@@ -41,12 +43,16 @@ class ConverterInput extends React.Component {
     
     ChangeInputValueUAH(e) {
         this.setState({
-            value: parseInt(e.target.value),
+            value: e.target.value,
         });
-        let valueInputValidate = e.target.value;
-
-        console.log(this.state.value);
-        
+    }
+    
+    BtnInputValueUAH(e) {
+        // regexp = new RegExp();
+        // let str = e.currentTarget.value;
+        // let regexp = '/s/g';
+        // alert(regexp.test(str));
+        console.log(this.state.value)
     }
     
 
@@ -114,8 +120,8 @@ class ConverterInput extends React.Component {
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
                 <h3>Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
-                <input type="text" onChange={this.ChangeInputValueUAH}/>
-                <button>Рассчитать</button>
+                <input type="text" placeholder="Введите гривни" onChange={this.ChangeInputValueUAH}/>
+                <button onClick={this.BtnInputValueUAH}>Рассчитать</button>
             </div>)
         }
 
@@ -144,9 +150,6 @@ function BtnUAHValute(props) {
             <button onClick={props.onClick}>UAH</button>
         </div>
     )
-}
-function CheckValueInputValidate(valueInput) {
-    
 }
 
 export default ConverterInput;
