@@ -14,7 +14,7 @@ class ConverterInput extends React.Component {
         this.btnEU = this.btnEU.bind(this);
         this.btnUAH = this.btnUAH.bind(this);
         this.BtnInputValueUAH = this.BtnInputValueUAH.bind(this);
-        this.ChangeInputValueUAH = this.BtnInputValueUAH.bind(this);
+        this.ChangeInputValueUAH = this.ChangeInputValueUAH.bind(this);
     }
     
     btnUAH() {
@@ -48,11 +48,14 @@ class ConverterInput extends React.Component {
     }
     
     BtnInputValueUAH(e) {
-        // regexp = new RegExp();
-        // let str = e.currentTarget.value;
-        // let regexp = '/s/g';
-        // alert(regexp.test(str));
-        console.log(this.state.value)
+        // console.log(this.state.value);
+        const regexp = /[a-z-_!@#$%^&*()~ а-я]/gi;
+        const str = this.state.value;
+        const result = regexp.test(str);
+        
+        if (!result) {
+            console.log("hgjkl")
+        }
     }
     
 
