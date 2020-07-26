@@ -97,7 +97,7 @@ class ConverterInput extends React.Component {
 }
 
     
-    componentWillMount() {
+    componentDidMount() {
         fetch('https://www.cbr-xml-daily.ru/daily_json.js') // api от ЦБ РФ
             .then(res => res.json()) // Получение данных и перевод в json-формат
             .then(
