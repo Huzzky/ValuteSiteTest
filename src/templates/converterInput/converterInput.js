@@ -48,7 +48,7 @@ class ConverterInput extends React.Component {
     
     BtnInputValueAllInput(e) {
         const {inputEULoaded, inputUAHLoaded, inputUSDLoaded} = this.state;
-        const regexp = /[a-z-_!@#$%^&*()~ а-я]/gi;
+        const regexp = /[a-z-_!@#$%^&*()~+=/<>?.,;:'"[]{} а-я]/gi;
         const str = this.state.value;
         if (this.state.value!==""){
             const result = regexp.test(str);
@@ -57,7 +57,7 @@ class ConverterInput extends React.Component {
             if (result) {
                 console.log("Исключение");
                 this.setState({
-                    valueCalcValute: "Вы ничего не ввели",
+                    valueCalcValute: "Вы ввели что-то не то...",
                 })
             }
             else if(!result) {
