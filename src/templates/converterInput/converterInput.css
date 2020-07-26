@@ -1,0 +1,84 @@
+.h2-fc-main {
+    color: #FFFF99
+}
+
+.btn-USD {
+	background-color:#333333;
+	display:inline-block;
+	cursor:pointer;
+	color:#9999ff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:9px 4em;
+	text-decoration:none;
+}
+.btn-USD:hover {
+	background-color:#333333;
+}
+.btn-USD:active {
+	position:relative;
+	top:1px;
+}
+
+.btn-EU {
+	background-color:#333333;
+	display:inline-block;
+	cursor:pointer;
+	color:#FFFF99;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:9px 4.35em;
+	text-decoration:none;
+}
+.btn-EU:hover {
+	background-color:#333333;
+}
+.btn-EU:active {
+	position:relative;
+	top:1px;
+}
+
+.btn-UAH {
+	background-color:#333333;
+	display:inline-block;
+	cursor:pointer;
+	color:#99FF99;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:9px 3.95em;
+	text-decoration:none;
+}
+.btn-UAH:hover {
+	background-color:#333333;
+}
+.btn-UAH:active {
+	position:relative;
+	top:1px;
+}
+
+.inp-fc {
+    font-size: 20px;
+    padding-right: 5em;
+    background-color: #333333;
+    margin-right: 1em;
+    color: #99FFFF;
+    font-weight: 600;
+}
+
+.h3-fc {
+    color: #99FFFF;
+}
+
+.btn-sum {
+    background-color: #333333;
+    color: #99FFFF;
+    padding: 5px 25px;
+    font-size: 1em;
+}
+
+.h2-fc {
+    color: #99FFFF;
+}

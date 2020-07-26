@@ -1,0 +1,23 @@
+.nmValute {
+    float: left;
+    font-weight: 700;
+    color: #FFFF99;
+    padding-bottom: 0.7em;
+}
+
+.nmCrs {
+    font-weight: 700;
+    color: #FFFF99;
+    padding-bottom: 0.7em;
+}
+
+td {
+    color: #FFFF99;
+}
+.nm-td {
+    padding-right: 5em;
+}
+
+table {
+    font-size: 25px;
+}

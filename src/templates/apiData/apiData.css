@@ -1,0 +1,10 @@
+.divMain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding-top: 17%;
+    padding-bottom: 22.5%;
+    background-color: #333333;
+}

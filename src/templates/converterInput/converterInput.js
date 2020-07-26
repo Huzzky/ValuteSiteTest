@@ -1,4 +1,5 @@
 import React from 'react';
+import './converterInput.css';
 
 class ConverterInput extends React.Component {
     constructor(props) {
@@ -8,13 +9,13 @@ class ConverterInput extends React.Component {
             inputUSDLoaded: false,
             inputEULoaded: false,
             inputUAHLoaded: false,
-
+            valueCalcValute: null,
         }
         this.btnUSD = this.btnUSD.bind(this);
         this.btnEU = this.btnEU.bind(this);
         this.btnUAH = this.btnUAH.bind(this);
-        this.BtnInputValueUAH = this.BtnInputValueUAH.bind(this);
-        this.ChangeInputValueUAH = this.ChangeInputValueUAH.bind(this);
+        this.BtnInputValueAllInput = this.BtnInputValueAllInput.bind(this);
+        this.ChangeInputValueAllInput = this.ChangeInputValueAllInput.bind(this);
     }
     
     btnUAH() {
@@ -24,7 +25,6 @@ class ConverterInput extends React.Component {
             inputUAHLoaded: true,   
         });
     }
-
     btnEU() {
         this.setState({
             inputUSDLoaded: false,
@@ -32,7 +32,6 @@ class ConverterInput extends React.Component {
             inputUAHLoaded: false,   
         });
     }
-
     btnUSD() {
         this.setState({
             inputUSDLoaded: true,
@@ -41,23 +40,61 @@ class ConverterInput extends React.Component {
         });
     }
     
-    ChangeInputValueUAH(e) {
+    ChangeInputValueAllInput(e) {
         this.setState({
             value: e.target.value,
         });
     }
     
-    BtnInputValueUAH(e) {
-        // console.log(this.state.value);
+    BtnInputValueAllInput(e) {
+        const {inputEULoaded, inputUAHLoaded, inputUSDLoaded} = this.state;
         const regexp = /[a-z-_!@#$%^&*()~ а-я]/gi;
         const str = this.state.value;
-        const result = regexp.test(str);
-        
-        if (!result) {
-            console.log("hgjkl")
+        if (this.state.value!==""){
+            const result = regexp.test(str);
+            console.log("Район рег выраж");
+            
+            if (result) {
+                console.log("Исключение");
+                this.setState({
+                    valueCalcValute: "Вы ничего не ввели",
+                })
+            }
+            else if(!result) {
+                const intValueValute = parseFloat(this.state.value);
+                if (inputEULoaded===true && inputUSDLoaded===false && inputUAHLoaded===false){
+                    console.log("1232343")
+                    const intValueEU = parseFloat(this.state.valueSecValute);
+                    const resultCalc = intValueValute*intValueEU;
+                    const resultCalc2 = Number((resultCalc).toFixed(2));
+                    this.setState({
+                        valueCalcValute: resultCalc2 + " рубля",
+                    })
+                }
+                else if(inputEULoaded===false && inputUSDLoaded===true && inputUAHLoaded===false) {
+                    const intValueUSD = parseFloat(this.state.valueFirstValute);
+                    const resultCalc = intValueValute*intValueUSD;
+                    const resultCalc2 = Number((resultCalc).toFixed(2));
+                    this.setState({
+                        valueCalcValute: resultCalc2 + " рубля",
+                    })
+                }
+                else if (inputEULoaded===false && inputUSDLoaded===false && inputUAHLoaded===true) {
+                    const intValueUAH = parseFloat(this.state.valueThiValute)/10;
+                    const resultCalc = intValueValute*intValueUAH;
+                    const resultCalc2 = Number((resultCalc).toFixed(2));
+                    this.setState({
+                        valueCalcValute: resultCalc2 + " рубля",
+                    })
+            }
+            }
         }
-    }
-    
+        else {
+            this.setState({
+                valueCalcValute: "Вы ничего не ввели",
+            })
+        }
+}
 
     
     componentDidMount() {
@@ -85,35 +122,39 @@ class ConverterInput extends React.Component {
                 <h1>Загрузка</h1>
             </div>)
         }
+        else if (inputEULoaded===false && inputUAHLoaded===false && inputUSDLoaded===false) {
+            // Открытие h1
+            return <div>
+                <h2 className="h2-fc-main">Выберите валюту</h2>
+                <BtnUSDValute onClick={this.btnUSD}/>
+                <BtnEUValute onClick={this.btnEU}/>
+                <BtnUAHValute onClick={this.btnUAH}/>
+                
+            </div>
+        }
         else if (inputEULoaded===true && inputUSDLoaded===false && inputUAHLoaded===false){ 
             // Открытие EU поля
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
-                <h3>Введи сколько тебе нужно ЕВРО перевести в рубли</h3>
-                <input type="text" onChange={this.ChangeInputValueUAH}/>
-                <button>Рассчитать</button>
+                <h3 className="h3-fc">Введи сколько тебе нужно ЕВРО перевести в рубли</h3>
+                <input  className="inp-fc" type="text" placeholder="Введите евро" onChange={this.ChangeInputValueAllInput}/>
+                <button className="btn-sum" onClick={this.BtnInputValueAllInput}>Рассчитать</button>
+                <h2 className="h2-fc">{this.state.valueCalcValute}</h2>
             </div>)
         }
-        else if (inputEULoaded===false && inputUAHLoaded===false && inputUSDLoaded===false) {
-            // Открытие h1
-            return <div>
-                <BtnUSDValute onClick={this.btnUSD}/>
-                <BtnEUValute onClick={this.btnEU}/>
-                <BtnUAHValute onClick={this.btnUAH}/>
-                <h1>Выбери валюту</h1>
-            </div>
-        }
+
         else if (inputEULoaded===true || inputUAHLoaded===false || inputUSDLoaded===true) {
             // Открытие USD поля
             return(<div>
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
-                <h3>Введи сколько тебе нужно ДОЛЛАРОВ перевести в рубли</h3>
-                <input type="text" onChange={this.ChangeInputValueUAH}/>
-                <button>Рассчитать</button>
+                <h3 className="h3-fc">Введи сколько тебе нужно ДОЛЛАРОВ перевести в рубли</h3>
+                <input className="inp-fc" type="text" placeholder="Введите доллары" onChange={this.ChangeInputValueAllInput}/>
+                <button className="btn-sum" onClick={this.BtnInputValueAllInput}>Рассчитать</button>
+                <h2 className="h2-fc">{this.state.valueCalcValute}</h2>
             </div>)
         }
         else if (inputEULoaded===false || inputUAHLoaded===true || inputUSDLoaded===false) {
@@ -122,9 +163,10 @@ class ConverterInput extends React.Component {
                 <BtnUSDValute onClick={this.btnUSD}/>
                 <BtnEUValute onClick={this.btnEU}/>
                 <BtnUAHValute onClick={this.btnUAH}/>
-                <h3>Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
-                <input type="text" placeholder="Введите гривни" onChange={this.ChangeInputValueUAH}/>
-                <button onClick={this.BtnInputValueUAH}>Рассчитать</button>
+                <h3 className="h3-fc">Введи сколько тебе нужно ГРИВЕНЬ в рубли</h3>
+                <input className="inp-fc" type="text" placeholder="Введите гривни" onChange={this.ChangeInputValueAllInput}/>
+                <button className="btn-sum" onClick={this.BtnInputValueAllInput}>Рассчитать</button>
+                <h2 className="h2-fc">{this.state.valueCalcValute}</h2>
             </div>)
         }
 
@@ -136,23 +178,24 @@ class ConverterInput extends React.Component {
 function BtnUSDValute(props) {
     return (
         <div>
-            <button onClick={props.onClick}>USD</button>
+            <button className="btn-USD btn-main" onClick={props.onClick}>USD</button>
         </div>
     )
 }
 function BtnEUValute(props) {
     return (
         <div>
-            <button onClick={props.onClick}>EU</button>
+            <button className="btn-EU btn-main" onClick={props.onClick}>EU</button>
         </div>
     )
 }
 function BtnUAHValute(props) {
     return (
         <div>
-            <button onClick={props.onClick}>UAH</button>
+            <button className="btn-UAH btn-main" onClick={props.onClick}>UAH</button>
         </div>
     )
 }
+
 
 export default ConverterInput;
